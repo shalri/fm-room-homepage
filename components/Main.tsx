@@ -1,4 +1,4 @@
-export default function SandBox() {
+export default function Hero() {
   return (
     <div className="flex flex-col items-center justify-center text-center">
       <h1 className="text-3xl font-bold text-zinc-500">

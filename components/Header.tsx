@@ -1,17 +1,84 @@
+"use client";
+
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { navLinks } from "./data";
+import { motion, AnimatePresence } from "framer-motion";
+
 export default function Header() {
+  const [isActive, setIsActive] = useState(false);
   return (
-    <header className="mb-6 w-full bg-zinc-200 py-3">
-      <nav className="container mx-auto flex items-center justify-between p-3">
-        <h1 className="text-lg font-bold">次に (tsugini)</h1>
-        <h2>
-          <a
-            href="https://github.com/shalri/soko"
-            className="font-semibold text-zinc-700 hover:text-zinc-800"
+    <>
+      <AnimatePresence>
+        {isActive && (
+          <motion.div
+            initial={{ opacity: 0, y: -100 }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            exit={{ y: -100 }}
+            className="absolute h-[100px] w-full bg-rh-white"
+          />
+        )}
+      </AnimatePresence>
+      <header className="mb-6 flex w-full items-center justify-center bg-gray-500 px-6 pt-[45px]">
+        <nav className="absolute flex w-full items-center justify-between px-6">
+          <button
+            className={cn(
+              "hamburger hamburger--spring js-hamburger",
+              isActive ? "is-active" : "",
+            )}
+            onClick={() => setIsActive(!isActive)}
+            aria-label="Menu"
+            role="button"
+            aria-controls="navigation"
           >
-            tsugini &middot; repo
-          </a>
-        </h2>
-      </nav>
-    </header>
+            <div className="hamburger-box">
+              <div className="hamburger-inner"></div>
+            </div>
+          </button>{" "}
+          {isActive && (
+            <motion.ul
+              className="z-10 flex items-end gap-x-8"
+              initial={{ opacity: 0, y: -100 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              transition={{
+                duration: 0.5,
+              }}
+              exit={{ y: -100 }}
+            >
+              {navLinks.map((link) => (
+                <li key={link.page}>
+                  <a href={link.url} className="z-10 font-bold text-rh-black">
+                    {link.page}
+                  </a>
+                </li>
+              ))}
+            </motion.ul>
+          )}
+        </nav>
+        <h1 className="flex w-full items-center justify-center text-lg font-bold">
+          <Link href="/">
+            <div className="relative h-[16px] w-[66px]">
+              <Image
+                src="./images/logo.svg"
+                fill
+                alt="Room Logo"
+                className="object-contain"
+              />
+            </div>
+          </Link>
+        </h1>
+      </header>
+    </>
   );
 }
