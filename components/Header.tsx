@@ -20,14 +20,14 @@ export default function Header() {
               y: 0,
             }}
             transition={{
-              duration: 0.5,
+              duration: 0.3,
             }}
             exit={{ y: -100 }}
-            className="absolute h-[100px] w-full bg-rh-white"
+            className="absolute z-20 h-[100px] w-full bg-rh-white"
           />
         )}
       </AnimatePresence>
-      <header className="mb-6 flex w-full items-center justify-center bg-gray-500 px-6 pt-[45px]">
+      <header className="fixed z-30 mb-6 flex w-full items-center justify-center px-6 pt-[45px]">
         <nav className="absolute flex w-full items-center justify-between px-6">
           <button
             className={cn(
@@ -45,14 +45,14 @@ export default function Header() {
           </button>{" "}
           {isActive && (
             <motion.ul
-              className="z-10 flex items-end gap-x-8"
+              className="z-30 flex items-end gap-x-8"
               initial={{ opacity: 0, y: -100 }}
               animate={{
                 opacity: 1,
                 y: 0,
               }}
               transition={{
-                duration: 0.5,
+                duration: 0.3,
               }}
               exit={{ y: -100 }}
             >
