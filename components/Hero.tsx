@@ -7,7 +7,6 @@ import Image from "next/image";
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [isVisible, setIsVisible] = useState(false);
 
   const nextSlide = () => {
     setDirection(1);
@@ -22,7 +21,6 @@ export default function Hero() {
   const slideVariants = {
     initial: (direction: number) => ({
       opacity: 0,
-      // rotate: "180deg",
       x: direction > 0 ? "100%" : "-100%",
     }),
     visible: {
@@ -34,8 +32,8 @@ export default function Hero() {
       // rotate: "180deg",
       // opacity: 0,
       x: direction > 0 ? "-100%" : "100%",
-      scale: 0.8,
-      transition: { duration: 0.2 },
+      // scale: 0.8,
+      transition: { duration: 0.5 },
     }),
   };
 
@@ -85,22 +83,18 @@ export default function Hero() {
                         className="object-cover"
                       />
                     </motion.picture>
-                    <div className="absolute bottom-0 right-0 flex justify-center space-x-4">
+                    <div className="absolute bottom-0 right-0 flex justify-center">
                       <button
                         onClick={prevSlide}
-                        className="rounded bg-gray-800 px-4 py-2 text-white"
-                      >
-                        Previous
-                      </button>
+                        className="prev-bg h-[55px] w-[55px] bg-contain p-4"
+                      ></button>
                       <button
                         onClick={nextSlide}
-                        className="rounded bg-gray-800 px-4 py-2 text-white"
-                      >
-                        Next
-                      </button>
+                        className="next-bg h-[55px] w-[55px]  px-4 py-2 text-white"
+                      ></button>
                     </div>
                   </div>
-                  <div className="overflow-hidden p-8">
+                  <div className="overflow-hidden px-8 py-[58px]">
                     <div>
                       <motion.h2
                         key={slide.headline}
@@ -108,11 +102,10 @@ export default function Hero() {
                         initial="initial"
                         animate="animate"
                         exit="exit"
-                        className="text-2xl font-bold"
+                        className="text-[2.5rem] font-semibold leading-[1]"
                       >
                         {slide.headline}
                       </motion.h2>
-
                       <motion.p
                         key={index}
                         initial={{ y: "200%", opacity: 0 }}
@@ -127,10 +120,34 @@ export default function Hero() {
                           transition: { duration: 0.5 },
                         }}
                         // transition={{ duration: "0.4" }}
-                        className="mt-2"
+                        className="mt-4 text-rh-dark-gray"
                       >
                         {slide.bodyCopy}
                       </motion.p>
+                      <motion.a
+                        className="mb-3 mt-11  flex items-baseline font-semibold uppercase tracking-[.8rem] text-rh-very-dark-gray"
+                        initial={{
+                          x: "-200%",
+                          opacity: 0,
+                        }}
+                        animate={{
+                          x: 0,
+                          opacity: 1,
+                          transition: {
+                            duration: 0.8,
+                          },
+                        }}
+                        exit={{ x: "30%" }}
+                      >
+                        Shop Now{" "}
+                        <div className="relative ml-6 h-[12px] w-[40px]">
+                          <Image
+                            src="./images/icon-arrow.svg"
+                            fill
+                            alt="arrow icon"
+                          />
+                        </div>
+                      </motion.a>
                     </div>
                   </div>
                 </div>

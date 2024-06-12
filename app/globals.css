@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+.prev-bg {
+  background: hsl(0, 0%, 0%) url(../public/images/icon-angle-left.svg) no-repeat
+    center;
+  background-size: 10px 16px;
+}
+.next-bg {
+  background: hsl(0, 0%, 0%) url(../public/images/icon-angle-right.svg)
+    no-repeat center;
+  background-size: 10px 16px;
+}
+
 .hamburger {
   /* padding: 15px 15px; */
   /* padding: 15px 15px; */

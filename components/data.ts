@@ -1,5 +1,5 @@
 const getBasePath = (): string => {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/";
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
   return basePath.endsWith("/") ? basePath.slice(0, -1) : basePath;
 };
 

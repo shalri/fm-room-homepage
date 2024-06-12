@@ -1,6 +1,6 @@
-export default function Footer() {
+export default function AboutUs() {
   return (
-    <footer className="w-full bg-zinc-300 px-3">
+    <section className="w-full bg-zinc-300 px-3">
       <div className="container mx-auto px-3 py-6 text-right">
         <a
           href="https://github.com/shalri"
@@ -10,6 +10,6 @@ export default function Footer() {
           FScode &middot; Shalri
         </a>
       </div>
-    </footer>
+    </section>
   );
 }
