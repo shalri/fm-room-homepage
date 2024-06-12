@@ -1,15 +1,18 @@
+import { aboutData } from "./data";
+
 export default function AboutUs() {
+  const { headline, bodyCopy } = aboutData;
+
   return (
-    <section className="w-full bg-zinc-300 px-3">
-      <div className="container mx-auto px-3 py-6 text-right">
-        <a
-          href="https://github.com/shalri"
-          className=" justify-self-end text-sm font-bold text-zinc-700"
-          target="_blank"
-        >
-          FScode &middot; Shalri
-        </a>
+    <section className="grid w-full grid-rows-3">
+      <div className="bg-black bg-[url(../public/images/image-about-dark.jpg)] bg-cover bg-no-repeat" />
+      <div className="px-8 py-12">
+        <h2 className="text-[0.9rem] font-bold uppercase tracking-[0.5rem]">
+          {headline}
+        </h2>
+        <p className="mt-4 text-rh-dark-gray">{bodyCopy}</p>
       </div>
+      <div className="bg-black bg-[url(../public/images/image-about-light.jpg)] bg-cover bg-no-repeat" />
     </section>
   );
 }

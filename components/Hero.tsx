@@ -21,7 +21,7 @@ export default function Hero() {
   const slideVariants = {
     initial: (direction: number) => ({
       opacity: 0,
-      x: direction > 0 ? "100%" : "-100%",
+      x: direction > 0 ? "-100%" : "100%",
     }),
     visible: {
       opacity: 1,
@@ -30,8 +30,8 @@ export default function Hero() {
     },
     exit: (direction: number) => ({
       // rotate: "180deg",
-      // opacity: 0,
-      x: direction > 0 ? "-100%" : "100%",
+      opacity: 0,
+      // x: direction > 0 ? "100%" : "-100%",
       // scale: 0.8,
       transition: { duration: 0.5 },
     }),
@@ -86,11 +86,11 @@ export default function Hero() {
                     <div className="absolute bottom-0 right-0 flex justify-center">
                       <button
                         onClick={prevSlide}
-                        className="prev-bg h-[55px] w-[55px] bg-contain p-4"
+                        className="prev-bg h-[55px] w-[55px] bg-contain p-4 duration-200 hover:bg-rh-very-dark-gray"
                       ></button>
                       <button
                         onClick={nextSlide}
-                        className="next-bg h-[55px] w-[55px]  px-4 py-2 text-white"
+                        className="next-bg transition-color h-[55px]  w-[55px] p-4 text-white duration-200 hover:bg-rh-very-dark-gray"
                       ></button>
                     </div>
                   </div>
@@ -119,13 +119,13 @@ export default function Hero() {
                           opacity: 0,
                           transition: { duration: 0.5 },
                         }}
-                        // transition={{ duration: "0.4" }}
                         className="mt-4 text-rh-dark-gray"
                       >
                         {slide.bodyCopy}
                       </motion.p>
                       <motion.a
-                        className="mb-3 mt-11  flex items-baseline font-semibold uppercase tracking-[.8rem] text-rh-very-dark-gray"
+                        className="transition-color mb-3  mt-11 flex cursor-pointer items-baseline font-semibold uppercase tracking-[.8rem] text-rh-very-dark-gray duration-300 hover:text-rh-dark-gray"
+                        href="#"
                         initial={{
                           x: "-200%",
                           opacity: 0,

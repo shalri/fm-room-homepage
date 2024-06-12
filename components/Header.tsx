@@ -27,7 +27,7 @@ export default function Header() {
           />
         )}
       </AnimatePresence>
-      <header className="fixed z-30 mb-6 flex w-full items-center justify-center px-6 pt-[45px]">
+      <header className="absolute z-30 mb-6 flex w-full items-center justify-center px-6 pt-[45px]">
         <nav className="absolute flex w-full items-center justify-between px-6">
           <button
             className={cn(
