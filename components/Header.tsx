@@ -3,12 +3,25 @@
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { navLinks } from "./data";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [isActive, setIsActive] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(0);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <AnimatePresence>
@@ -23,7 +36,7 @@ export default function Header() {
               duration: 0.3,
             }}
             exit={{ y: -100 }}
-            className="absolute z-20 h-[100px] w-full bg-rh-white"
+            className="absolute z-20 h-[100px] w-full bg-rh-white sm:hidden"
           />
         )}
       </AnimatePresence>
@@ -31,7 +44,7 @@ export default function Header() {
         <nav className="absolute flex w-full items-center justify-between px-6">
           <button
             className={cn(
-              "hamburger hamburger--spring js-hamburger",
+              "hamburger hamburger--spring js-hamburger sm:hidden",
               isActive ? "is-active" : "",
             )}
             onClick={() => setIsActive(!isActive)}
@@ -43,30 +56,45 @@ export default function Header() {
               <div className="hamburger-inner"></div>
             </div>
           </button>{" "}
-          {isActive && (
-            <motion.ul
-              className="z-30 flex items-end gap-x-8"
-              initial={{ opacity: 0, y: -100 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.3,
-              }}
-              exit={{ y: -100 }}
-            >
+          {windowWidth > 900 ? (
+            <motion.ul className="z-30 gap-x-8 sm:ml-44 sm:flex sm:pt-1">
               {navLinks.map((link) => (
                 <li key={link.page}>
-                  <a href={link.url} className="z-10 font-bold text-rh-black">
+                  <a
+                    href={link.url}
+                    className="z-10 font-bold sm:text-rh-white"
+                  >
                     {link.page}
                   </a>
                 </li>
               ))}
             </motion.ul>
+          ) : (
+            isActive && (
+              <motion.ul
+                className="z-30 flex items-end gap-x-8"
+                initial={{ opacity: 0, y: -100 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.3,
+                }}
+                exit={{ y: -100 }}
+              >
+                {navLinks.map((link) => (
+                  <li key={link.page}>
+                    <a href={link.url} className="z-10 font-bold text-rh-black">
+                      {link.page}
+                    </a>
+                  </li>
+                ))}
+              </motion.ul>
+            )
           )}
         </nav>
-        <h1 className="flex w-full items-center justify-center text-lg font-bold">
+        <h1 className="flex w-full items-center justify-center text-lg font-bold sm:justify-start sm:px-10">
           <Link href="/">
             <div className="relative h-[16px] w-[66px]">
               <Image

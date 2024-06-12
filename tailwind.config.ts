@@ -27,6 +27,7 @@ const config: Config = {
         bold: "700",
       },
       screens: {
+        sm: "900px",
         mobile: "375px",
         desktop: "1440px",
       },
