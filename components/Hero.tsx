@@ -60,7 +60,7 @@ export default function Hero() {
           index === currentSlide ? (
             <div key={index} className="sm:flex">
               {/* TODO: Randomize bgcolor */}
-              <div className="relative h-[360px] w-full   bg-red-700  sm:min-h-[67vh] sm:w-[60%]">
+              <div className="relative h-[360px] w-full  bg-red-700  sm:min-h-[670px] sm:w-[60%]">
                 <motion.picture
                   key={slide.headline}
                   className="relative block h-full w-full overflow-hidden"
@@ -72,7 +72,7 @@ export default function Hero() {
                   layout
                 >
                   <source
-                    media="(min-width: 768px)"
+                    media="(min-width: 900px)"
                     srcSet={slide.imgDesktop as string}
                   />
                   <Image
@@ -96,7 +96,7 @@ export default function Hero() {
               </div>
               <motion.div
                 layout
-                className="overflow-hidden bg-white px-8 py-[58px] sm:z-10 sm:mx-auto sm:flex sm:w-[40%] sm:max-w-[500px] sm:shrink-0 sm:items-center"
+                className="overflow-hidden bg-white px-8 py-[58px] sm:z-10 sm:mx-auto sm:flex sm:min-h-[460px] sm:w-[40%] sm:max-w-[500px] sm:shrink-0 sm:items-center"
               >
                 <div>
                   <motion.h2
