@@ -36,7 +36,7 @@ export default function Header() {
               duration: 0.3,
             }}
             exit={{ y: -100 }}
-            className="absolute z-20 h-[100px] w-full bg-rh-white sm:hidden"
+            className="absolute z-30 h-[100px] w-full bg-rh-white sm:hidden"
           />
         )}
       </AnimatePresence>
