@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${league_spartan.className} flex min-h-screen flex-col`}
+        className={`${league_spartan.className} flex min-h-screen flex-col scroll-smooth`}
       >
         {children}
       </body>

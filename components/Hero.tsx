@@ -3,19 +3,34 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { heroData } from "./data";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 export default function Hero() {
+  const colors = [
+    "bg-red-700",
+    "bg-blue-700",
+    "bg-yellow-500",
+    "bg-green-700",
+    "bg-purple-700",
+  ];
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(1);
+  const [bgColor, setBgColor] = useState(colors[0]);
 
   const nextSlide = () => {
     setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % heroData.length);
+    setTimeout(() => {
+      setBgColor(getRandomColor());
+    }, 1200);
   };
 
   const prevSlide = () => {
     setDirection(-1);
     setCurrentSlide((prev) => (prev - 1 + heroData.length) % heroData.length);
+    setTimeout(() => {
+      setBgColor(getRandomColor());
+    }, 1200);
   };
 
   const slideVariants = {
@@ -28,11 +43,8 @@ export default function Hero() {
       x: 0,
       transition: { duration: 0.5 },
     },
-    exit: (direction: number) => ({
-      // rotate: "180deg",
+    exit: () => ({
       opacity: 0,
-      // x: direction > 0 ? "100%" : "-100%",
-      // scale: 0.8,
       transition: { duration: 0.5 },
     }),
   };
@@ -45,44 +57,53 @@ export default function Hero() {
       transition: { duration: 0.3 },
     },
     exit: {
-      // rotate: "180deg",
       x: "-10%",
       opacity: 0,
       transition: { duration: 0.3 },
     },
   };
 
+  const getRandomColor = () => {
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  };
   return (
     <section className="relative h-full w-full overflow-hidden">
-      {/* // <div className="flex sm:flex-nowrap overflow-hidden"> */}
       <AnimatePresence mode="wait" initial={false}>
         {heroData.map((slide, index) =>
           index === currentSlide ? (
             <div key={index} className="sm:flex">
               {/* TODO: Randomize bgcolor */}
-              <div className="relative h-[360px] w-full  bg-red-700  sm:min-h-[670px] sm:w-[60%]">
-                <motion.picture
-                  key={slide.headline}
-                  className="relative block h-full w-full overflow-hidden"
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="initial"
-                  animate="visible"
-                  exit="exit"
-                  layout
-                >
-                  <source
-                    media="(min-width: 900px)"
-                    srcSet={slide.imgDesktop as string}
-                  />
-                  <Image
-                    key={slide.imgMobile}
-                    src={slide.imgMobile}
-                    alt={slide.headline}
-                    fill
-                    className="object-cover"
-                  />
-                </motion.picture>
+              <div
+                className={cn(
+                  "transition-color relative h-[360px] w-full duration-300 sm:min-h-[670px] sm:w-[60%]",
+                  `${bgColor}`,
+                )}
+              >
+                <div className="h-full w-full overflow-hidden">
+                  <motion.picture
+                    key={slide.headline}
+                    className="relative z-10 block h-full w-full overflow-hidden"
+                    custom={direction}
+                    variants={slideVariants}
+                    initial="initial"
+                    animate="visible"
+                    exit="exit"
+                    layout
+                  >
+                    <source
+                      media="(min-width: 900px)"
+                      srcSet={slide.imgDesktop as string}
+                    />
+                    <Image
+                      key={slide.imgMobile}
+                      src={slide.imgMobile}
+                      alt={slide.headline}
+                      fill
+                      className="object-cover"
+                    />
+                  </motion.picture>
+                </div>
                 <div className="absolute bottom-0 right-0 z-20 flex justify-center sm:-right-[160px]">
                   <button
                     onClick={prevSlide}
@@ -129,7 +150,9 @@ export default function Hero() {
                     {slide.bodyCopy}
                   </motion.p>
                   <motion.a
-                    className="transition-color mb-3  mt-11 flex cursor-pointer items-baseline font-semibold uppercase tracking-[.8rem] text-rh-very-dark-gray duration-300 hover:text-rh-dark-gray"
+                    className={cn(
+                      "transition-color mb-3  mt-11 flex cursor-pointer items-baseline font-semibold uppercase tracking-[.8rem] text-rh-very-dark-gray hover:text-rh-dark-gray",
+                    )}
                     href="#"
                     initial={{
                       x: "-200%",
@@ -143,15 +166,22 @@ export default function Hero() {
                       },
                     }}
                     exit={{ x: "30%" }}
+                    whileHover={{
+                      x: "20px",
+                      transition: {
+                        type: "spring",
+                        duration: 0.1,
+                      },
+                    }}
                   >
                     Shop Now{" "}
-                    <div className="relative ml-6 h-[12px] w-[40px]">
+                    <motion.div className="relative ml-6 h-[12px] w-[40px]">
                       <Image
                         src="./images/icon-arrow.svg"
                         fill
                         alt="arrow icon"
                       />
-                    </div>
+                    </motion.div>
                   </motion.a>
                 </div>
               </motion.div>
