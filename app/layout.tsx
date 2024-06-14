@@ -5,8 +5,9 @@ import "./globals.css";
 const league_spartan = League_Spartan({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "次に(tsugini) | FScode",
-  description: "A basic NextJS template for Frontend Mentor Challenges",
+  title: "Room Homepage | FScode",
+  description:
+    "A solution for the Room Homepage Challenge from Frontend Mentor",
 };
 
 export default function RootLayout({
